@@ -17,11 +17,8 @@ Dynamic Tokenization: Tokenizes text streams in real-time using the EleutherAI/p
 🛠️ Prerequisites:
 
 Python 3.10+
-
 PyTorch
-
 Transformers
-
 Datasets
 
 📦 Installation:
@@ -33,13 +30,9 @@ Install the required dependencies using pip:
 🚀 Usage:
 
 The pipeline is contained within the provided Python script/notebook. It performs the following steps automatically:
-
 Load Dataset: Streams the roneneldan/TinyStories dataset.
-
 Tokenize: Maps the tokenizer over the stream without padding.
-
 Group/Chunk: Uses a buffer to create inputs of block_size=256.
-
 Batch: Produces PyTorch tensors ready for training.
 
 To run the pipeline, execute the script or notebook cells sequentially.
@@ -52,7 +45,7 @@ The pipeline follows a specific flow to ensure data is continuous and shapes are
 
 We utilize the TinyStories dataset, which is a synthetic collection of short stories. By setting streaming=True, we avoid downloading the full dataset to the disk/RAM immediately.
 
-3. The Rolling Buffer (Core Logic)
+2. The Rolling Buffer (Core Logic)
 
 Standard datasets truncate text to fit a context window, often wasting data or losing context at the end of a document. This pipeline uses a Rolling Buffer approach:
 
@@ -73,12 +66,9 @@ The generator above is wrapped in a class that inherits from torch.utils.data.It
 
 When running the pipeline, the DataLoader produces batches with the following shape:
 
-Plaintext
-
 Batch 0 -> input_ids shape: torch.Size([8, 256])
 Batch 1 -> input_ids shape: torch.Size([8, 256])
 Batch 2 -> input_ids shape: torch.Size([8, 256])
-Batch Size: 8
 
 Context Length: 256 tokens
 
