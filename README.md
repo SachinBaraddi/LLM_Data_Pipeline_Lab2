@@ -12,7 +12,8 @@ PyTorch Integration: Wraps the generator in a IterableDataset and utilizes a cus
 
 Dynamic Tokenization: Tokenizes text streams in real-time using the EleutherAI/pythia-70m tokenizer.
 
-🛠️ Prerequisites
+🛠️ Prerequisites:
+
 Python 3.10+
 
 PyTorch
@@ -21,12 +22,14 @@ Transformers
 
 Datasets
 
-📦 Installation
+📦 Installation:
+
 Install the required dependencies using pip:
 
 !pip install transformers torch datasets
 
-🚀 Usage
+🚀 Usage:
+
 The pipeline is contained within the provided Python script/notebook. It performs the following steps automatically:
 
 Load Dataset: Streams the roneneldan/TinyStories dataset.
@@ -39,7 +42,8 @@ Batch: Produces PyTorch tensors ready for training.
 
 To run the pipeline, execute the script or notebook cells sequentially.
 
-🏗️ Pipeline Architecture
+🏗️ Pipeline Architecture:
+
 The pipeline follows a specific flow to ensure data is continuous and shapes are consistent for the GPU.
 
 1. The Dataset
