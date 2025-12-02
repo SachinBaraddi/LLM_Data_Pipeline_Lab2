@@ -64,17 +64,6 @@ Once len(buffer) >= block_size, a chunk is yielded.
 
 Remaining tokens stay in the buffer for the next document.
 
-
-# Simplified logic from the code
-
-def group_texts_streaming(dataset_iter, block_size):
-    buffer = []
-    for example in dataset_iter:
-        buffer.extend(example["input_ids"])
-        while len(buffer) >= block_size:
-            chunk = buffer[:block_size]
-            buffer = buffer[block_size:]
-            yield {"input_ids": chunk}
             
 3. PyTorch IterableDataset
 
