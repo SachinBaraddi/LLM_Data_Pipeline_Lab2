@@ -49,9 +49,11 @@ To run the pipeline, execute the script or notebook cells sequentially.
 The pipeline follows a specific flow to ensure data is continuous and shapes are consistent for the GPU.
 
 1. The Dataset
+
 We utilize the TinyStories dataset, which is a synthetic collection of short stories. By setting streaming=True, we avoid downloading the full dataset to the disk/RAM immediately.
 
-2. The Rolling Buffer (Core Logic)
+3. The Rolling Buffer (Core Logic)
+
 Standard datasets truncate text to fit a context window, often wasting data or losing context at the end of a document. This pipeline uses a Rolling Buffer approach:
 
 Incoming text is tokenized.
@@ -62,9 +64,9 @@ Once len(buffer) >= block_size, a chunk is yielded.
 
 Remaining tokens stay in the buffer for the next document.
 
-Python
 
 # Simplified logic from the code
+
 def group_texts_streaming(dataset_iter, block_size):
     buffer = []
     for example in dataset_iter:
@@ -73,7 +75,9 @@ def group_texts_streaming(dataset_iter, block_size):
             chunk = buffer[:block_size]
             buffer = buffer[block_size:]
             yield {"input_ids": chunk}
+            
 3. PyTorch IterableDataset
+
 The generator above is wrapped in a class that inherits from torch.utils.data.IterableDataset, making it compatible with the standard PyTorch training loop.
 
 📊 Sample Output
