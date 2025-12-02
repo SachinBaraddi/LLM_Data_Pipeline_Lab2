@@ -1,9 +1,11 @@
 This project demonstrates how to build a memory-efficient, true streaming data pipeline for training Large Language Models (LLMs) using the Hugging Face datasets library and PyTorch.
 
 🎯 Goal
+
 The primary goal of this pipeline is to process web-scale corpora without loading the entire dataset into RAM. It mimics real-world pipelines used for training large models (like GPT or Pythia) by performing on-the-fly tokenization and concatenating text into fixed-length context blocks.
 
 🔑 Key Features
+
 True Streaming: Uses Hugging Face's streaming=True to load data as an iterator, enabling the processing of datasets larger than available memory.
 
 Rolling Buffer Window: Implements a logic to concatenate text chunks and group them into fixed block_size sequences (e.g., 256 tokens) across document boundaries.
@@ -75,6 +77,7 @@ def group_texts_streaming(dataset_iter, block_size):
 The generator above is wrapped in a class that inherits from torch.utils.data.IterableDataset, making it compatible with the standard PyTorch training loop.
 
 📊 Sample Output
+
 When running the pipeline, the DataLoader produces batches with the following shape:
 
 Plaintext
